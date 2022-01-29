@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Assets/old-man-wlak-1.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/Old Man.gd" type="Script" id=2]
 [ext_resource path="res://Assets/bedroom-top-and-sides.png" type="Texture" id=3]
 [ext_resource path="res://Assets/bedroom-bottom-wall.png" type="Texture" id=4]
@@ -9,39 +9,78 @@
 [ext_resource path="res://Assets/bedroom-alarm.png" type="Texture" id=7]
 [ext_resource path="res://Assets/bedroom-closet.png" type="Texture" id=8]
 [ext_resource path="res://Assets/kid-walk-1.png" type="Texture" id=9]
+[ext_resource path="res://Assets/old-man-walk-1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/old-man-walk-2.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 40 )
 
-[sub_resource type="GDScript" id=12]
-script/source = "extends KinematicBody2D
+[sub_resource type="Animation" id=17]
+resource_name = "Idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
 
-export (int) var speed = 200
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 11 ) ]
+}
 
-var screen_size
-var velocity = Vector2()
+[sub_resource type="Animation" id=16]
+resource_name = "Run Left"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ), ExtResource( 10 ) ]
+}
 
-func ready():
-	screen_size = get_viewport_rect().size
-
-func get_input():
-	#look_at(get_global_mouse_position())
-	velocity = Vector2()
-	if Input.is_action_pressed(\"right\"):
-		velocity.x += 1
-	if Input.is_action_pressed(\"left\"):
-		velocity.x -= 1
-	if Input.is_action_pressed(\"down\"):
-		velocity.y += 1
-	if Input.is_action_pressed(\"up\"):
-		velocity.y -= 1
-	velocity = velocity.normalized() * speed
-
-func _physics_process(delta):
-	get_input()
-	velocity = move_and_slide(velocity)
-
-"
+[sub_resource type="Animation" id=14]
+resource_name = "Run Right"
+length = 0.4
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ), ExtResource( 10 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 30, 40 )
@@ -70,7 +109,7 @@ extents = Vector2( 640, 50 )
 [node name="Room" type="Node2D"]
 
 [node name="Old Man" type="KinematicBody2D" parent="."]
-position = Vector2( 325, 277 )
+position = Vector2( 304, 271 )
 z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -78,30 +117,35 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Old Man"]
-position = Vector2( 0, 46 )
+position = Vector2( 0, 70 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Old Man"]
+texture = ExtResource( 11 )
+
+[node name="Front" type="Sprite" parent="Old Man"]
 texture = ExtResource( 1 )
-centered = false
-offset = Vector2( -380, -260 )
+offset = Vector2( 0, 70 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Old Man"]
+anims/Idle = SubResource( 17 )
+anims/RESET = SubResource( 15 )
+"anims/Run Left" = SubResource( 16 )
+"anims/Run Right" = SubResource( 14 )
 
 [node name="Kid" type="KinematicBody2D" parent="."]
 position = Vector2( 420, 303 )
 z_index = 1
-script = SubResource( 12 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kid"]
-position = Vector2( 0, 20 )
+position = Vector2( 0, 58 )
 shape = SubResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="Kid"]
 texture = ExtResource( 9 )
-centered = false
-offset = Vector2( -380, -260 )
 
 [node name="Closet" type="StaticBody2D" parent="."]
 __meta__ = {
