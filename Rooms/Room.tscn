@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/Old Man.gd" type="Script" id=2]
@@ -11,10 +11,6 @@
 [ext_resource path="res://Assets/kid-walk-1.png" type="Texture" id=9]
 [ext_resource path="res://Assets/old-man-walk-1.png" type="Texture" id=10]
 [ext_resource path="res://Assets/old-man-walk-2.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/TimeSprite.gd" type="Script" id=12]
-[ext_resource path="res://Player/whitecat.png" type="Texture" id=13]
-[ext_resource path="res://Player/brownncat.png" type="Texture" id=14]
-
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 40 )
@@ -129,7 +125,6 @@ texture = ExtResource( 11 )
 
 [node name="Front" type="Sprite" parent="Old Man"]
 texture = ExtResource( 1 )
-
 offset = Vector2( 0, 70 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Old Man"]
@@ -137,11 +132,7 @@ anims/Idle = SubResource( 17 )
 anims/RESET = SubResource( 15 )
 "anims/Run Left" = SubResource( 16 )
 "anims/Run Right" = SubResource( 14 )
-
 script = ExtResource( 5 )
-oldSprite = ExtResource( 8 )
-kidSprite = ExtResource( 6 )
-
 
 [node name="Kid" type="KinematicBody2D" parent="."]
 position = Vector2( 420, 303 )
