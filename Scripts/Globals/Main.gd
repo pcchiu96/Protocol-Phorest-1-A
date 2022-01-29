@@ -5,10 +5,18 @@ extends Node
 var isOld
 var interactablesList
 
+var currentRoom = "Bedroom"
+
+
 func _ready():
+	isOld = true
 	interactablesList = {}
 
 func registerInteractable(id, interactable):
 	if(!interactablesList.has(id)):
 		interactablesList[id] = interactable
 		print("Interactable registered: " + id)
+
+func heartAttack(): 
+	isOld = false
+	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Kid.tscn")
