@@ -14,7 +14,7 @@ func _ready():
 func _input(event):
 	if Input.is_action_pressed("ui_accept"):
 		if(isActive):
-			get_parent().find_node("DialogBox").displayDialog(promptText)
+			find_parent("Room").find_node("DialogBox").displayDialog(promptText)
 			triggerOptions()
 
 func triggerOptions():
@@ -29,6 +29,4 @@ func interactLeave():
 	get_node("InspectIcon").visible = false
 	isActive = false
 	
-func optionSelect(optionString):
-	pass
 	
