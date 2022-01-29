@@ -1,13 +1,12 @@
 extends Node
 
 var isOld
+var interactablesList
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	interactablesList = {}
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func registerInteractable(id, interactable):
+	if(!interactablesList.has(id)):
+		interactablesList[id] = interactable
+		print("Interactable registered: " + id)
