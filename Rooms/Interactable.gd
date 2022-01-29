@@ -1,4 +1,4 @@
-extends CollisionShape2D
+extends StaticBody2D
 
 # id of the interactable used to register into game variables
 export (String) var id
@@ -11,11 +11,12 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_pressed("ui_accept"):
-		get_parent().get_node("InspectIcon").visible = true
+		get_node("InspectIcon").visible = true
 		
 func interactHover():
-	get_parent().get_node("InspectIcon").visible = true
+	get_node("InspectIcon").visible = true
 	
 func interactLeave():
-	get_parent().get_node("InspectIcon").visible = false
+	get_node("InspectIcon").visible = false
+	
 	
