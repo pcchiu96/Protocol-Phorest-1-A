@@ -14,6 +14,11 @@ config/name="Protocol-Phorest-1-A"
 run/main_scene="res://Rooms/Room.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Main="*res://Scripts/Main.gd"
+RoutineList="*res://Scripts/RoutineList.gd"
+
 [display]
 
 window/size/width=1280
