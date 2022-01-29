@@ -43,14 +43,11 @@ func get_input():
 	if (velocity.x == 0 and velocity.y == 0):
 		$AnimationPlayer.play("Idle")
 		
-	if Input.is_action_pressed("time_travel"):
-		SceneChanger.change_scene("res://Rooms/Bedroom-Old.tscn")
-		
 	velocity = velocity.normalized() * speed
 
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
 	
-	#$TouchySensorArea.position = touchySensor
+	$TouchySensorArea.position = touchySensor
 

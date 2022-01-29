@@ -7,8 +7,15 @@ var interactablesList
 
 func _ready():
 	interactablesList = {}
+	isOld = true
 
 func registerInteractable(id, interactable):
 	if(!interactablesList.has(id)):
 		interactablesList[id] = interactable
 		print("Interactable registered: " + id)
+
+func getIsOldString():
+	if (isOld):
+		return "Old"
+	else:
+		return "Kid"
