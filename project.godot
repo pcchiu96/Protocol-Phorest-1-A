@@ -16,8 +16,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Main="*res://Scripts/Main.gd"
-RoutineList="*res://Scripts/RoutineList.gd"
+Main="*res://Scripts/Globals/Main.gd"
+RoutineList="*res://Scripts/Globals/RoutineList.gd"
+GameUiElements="*res://Scripts/Globals/GameUIElements.gd"
 
 [display]
 
