@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
+export (int) var directionOffset = 50
 export (int) var speed = 200
+export (int) var test
 
 var velocity = Vector2()
 var touchySensor = Vector2()
 var direction
-var directionOffset = 40
 
 func get_input():
 	velocity = Vector2()
@@ -19,14 +20,14 @@ func get_input():
 	if Input.is_action_pressed("left"):
 		direction = "left"
 		velocity.x -= 1
-		touchySensor.x = -1 * directionOffset
+		touchySensor.x = -directionOffset
 		touchySensor.y = 0
 		$Sprite.flip_h = false
 		$AnimationPlayer.play("Run Left")
 	if Input.is_action_pressed("down"):
 		velocity.y += 1
 		touchySensor.x = 0
-		touchySensor.y = 1
+		touchySensor.y = 1 * directionOffset
 		if (direction == "right"):
 			$AnimationPlayer.play("Run Right")
 		else:
@@ -47,6 +48,8 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
-	$Front.position = touchySensor
+	
+	$TouchySensorArea.position = touchySensor
+	
 	
 	
