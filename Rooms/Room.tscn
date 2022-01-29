@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/Old Man.gd" type="Script" id=2]
+[ext_resource path="res://Assets/bedroom-top-and-sides.png" type="Texture" id=3]
+[ext_resource path="res://Assets/bedroom-bottom-wall.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.5, 30.5 )
@@ -9,16 +11,23 @@ extents = Vector2( 30.5, 30.5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 29, 29 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 640, 30 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 45, 358.75 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 45, 358.75 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30, 358.75 )
+extents = Vector2( 640, 75 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 640, 45 )
 
 [node name="Room" type="Node2D"]
 
 [node name="Old Man" type="KinematicBody2D" parent="."]
 position = Vector2( 325, 276 )
+z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -32,7 +41,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 1 )
 
 [node name="Static Object" type="StaticBody2D" parent="."]
-position = Vector2( 155, 145 )
+position = Vector2( 491, 411 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -44,23 +53,38 @@ shape = SubResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="Borders" type="StaticBody2D" parent="."]
-position = Vector2( 644, 389 )
+position = Vector2( 645, 389 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Top Wall" type="CollisionShape2D" parent="Borders"]
-position = Vector2( -4, -359 )
-shape = SubResource( 3 )
-
 [node name="Left Wall" type="CollisionShape2D" parent="Borders"]
-position = Vector2( -612, -28.25 )
-shape = SubResource( 4 )
+position = Vector2( -600, -30 )
+shape = SubResource( 5 )
 
 [node name="Right Wall" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 604, -28 )
+position = Vector2( 591, -31 )
+shape = SubResource( 6 )
+
+[node name="Top Wall" type="CollisionShape2D" parent="Borders"]
+position = Vector2( -4, -314 )
 shape = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Borders/Top Wall"]
+position = Vector2( 0, 285 )
+texture = ExtResource( 3 )
 
 [node name="Bottom Wall" type="CollisionShape2D" parent="Borders"]
-position = Vector2( -4, 301 )
+position = Vector2( -4, 286 )
+z_index = 3
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Borders/Bottom Wall"]
+position = Vector2( -2, -312 )
+texture = ExtResource( 4 )
