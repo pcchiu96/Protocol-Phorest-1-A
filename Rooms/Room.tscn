@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Rooms/TouchySensorArea.gd" type="Script" id=1]
 [ext_resource path="res://Player/Old Man.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Assets/old-man-walk-2.png" type="Texture" id=11]
 [ext_resource path="res://Rooms/Interactable.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Inspect Icon.png" type="Texture" id=13]
+[ext_resource path="res://Rooms/DialogBox.gd" type="Script" id=14]
+[ext_resource path="res://icon.png" type="Texture" id=15]
 
 [sub_resource type="GDScript" id=9]
 script/source = "extends Node
@@ -29,6 +31,39 @@ func _ready():
 	if(singletonSelf == null):
 		singletonSelf = self
 "
+
+[sub_resource type="Theme" id=19]
+
+[sub_resource type="Animation" id=20]
+resource_name = "DialogAnimation"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1168, 648 ), Vector2( 1168, 632 ), Vector2( 1168, 648 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1168, 648 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 18 )
@@ -127,8 +162,53 @@ extents = Vector2( 640, 34.5 )
 script = SubResource( 9 )
 inspectorIcon = ExtResource( 10 )
 
+[node name="UI" type="Node2D" parent="."]
+z_index = 10
+
+[node name="DialogBox" type="Node2D" parent="UI"]
+visible = false
+script = ExtResource( 14 )
+
+[node name="DialogBG" type="ColorRect" parent="UI/DialogBox"]
+margin_left = 64.0
+margin_top = 528.0
+margin_right = 1232.0
+margin_bottom = 696.0
+color = Color( 0.258824, 0.603922, 0.580392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogText" type="RichTextLabel" parent="UI/DialogBox"]
+margin_left = 104.0
+margin_top = 552.0
+margin_right = 536.0
+margin_bottom = 640.0
+theme = SubResource( 19 )
+text = "This is Placeholder Text"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/DialogBox"]
+position = Vector2( 1168, 648 )
+z_index = 11
+texture = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DialogBox"]
+anims/DialogAnimation = SubResource( 20 )
+anims/RESET = SubResource( 21 )
+
+[node name="Old-man-walk-1" type="Sprite" parent="UI/DialogBox"]
+position = Vector2( 200, 456 )
+scale = Vector2( 2.27143, 2.27143 )
+z_index = -1
+texture = ExtResource( 10 )
+flip_h = true
+
 [node name="Old Man" type="KinematicBody2D" parent="."]
-position = Vector2( 480, 440 )
+position = Vector2( 1024, 264 )
 z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -184,6 +264,54 @@ centered = false
 
 [node name="Alarm" type="StaticBody2D" parent="."]
 script = ExtResource( 12 )
+id = "AlarmClock"
+promptText = "This is an alarm clock"
+
+[node name="Selection" type="Popup" parent="Alarm"]
+visible = true
+margin_left = 448.0
+margin_top = 168.0
+margin_right = 888.0
+margin_bottom = 488.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="Alarm/Selection"]
+margin_left = 56.0
+margin_top = 16.0
+margin_right = 328.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 224, 56 )
+text = "Screamo"
+align = 1
+
+[node name="OptionButton2" type="OptionButton" parent="Alarm/Selection"]
+margin_left = 56.0
+margin_top = 296.0
+margin_right = 328.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( 224, 56 )
+text = "River flows in you"
+align = 1
+
+[node name="OptionButton3" type="OptionButton" parent="Alarm/Selection"]
+margin_left = 56.0
+margin_top = 104.0
+margin_right = 328.0
+margin_bottom = 168.0
+rect_pivot_offset = Vector2( 224, 56 )
+text = "Morning News"
+align = 1
+
+[node name="OptionButton4" type="OptionButton" parent="Alarm/Selection"]
+margin_left = 56.0
+margin_top = 200.0
+margin_right = 328.0
+margin_bottom = 264.0
+rect_pivot_offset = Vector2( 224, 56 )
+text = "Spike defusing"
+align = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alarm"]
 position = Vector2( 1133, 254.5 )
