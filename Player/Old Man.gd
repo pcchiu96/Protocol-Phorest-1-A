@@ -2,10 +2,14 @@ extends KinematicBody2D
 
 export (int) var speed = 200
 
+var screen_size
 var velocity = Vector2()
 
+func ready():
+	screen_size = get_viewport_rect().size
+
 func get_input():
-	look_at(get_global_mouse_position())
+	#look_at(get_global_mouse_position())
 	velocity = Vector2()
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
@@ -20,3 +24,4 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
+
