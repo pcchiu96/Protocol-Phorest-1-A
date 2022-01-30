@@ -19,6 +19,7 @@ func _input(event):
 		var soundPlayer = get_node("AlarmSoundPlayer")
 		
 		soundPlayer.stream = alarm
+		soundPlayer.stream.loop = false
 		
 		#Main.heartAttack()
 		
@@ -28,4 +29,5 @@ func triggerAutoInteract():
 		
 	soundPlayer.stream = alarm
 	soundPlayer.play()
-	Main.heartAttack(2)
+	print("Play sounds")
+	Main.heartAttack(1.5)
