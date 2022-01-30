@@ -13,9 +13,8 @@ func _ready():
 	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func isTouchySensor():
+	return true
 
 func _physics_process(delta):
 	var overlappingBodies = get_overlapping_bodies()

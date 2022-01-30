@@ -25,6 +25,6 @@ func getIsOldString():
 		return "Kid"
 
 
-func heartAttack(): 
+func heartAttack(delay): 
 	isOld = false
-	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Kid.tscn")
+	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Kid.tscn", delay)

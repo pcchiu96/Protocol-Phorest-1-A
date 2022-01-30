@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/bedroom-bed.png" type="Texture" id=1]
 [ext_resource path="res://Assets/old-man-walk-1.png" type="Texture" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://icon.png" type="Texture" id=14]
 [ext_resource path="res://Rooms/SelectionOption.gd" type="Script" id=15]
 [ext_resource path="res://Assets/Yiruma-River-Flows-In-You.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Rooms/AutoInteract.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Alert-Triangle.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Alert-Exclamation.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Defuse_Start.mp3" type="AudioStream" id=20]
 
 [sub_resource type="GDScript" id=9]
 script/source = "extends Node
@@ -111,6 +115,40 @@ extents = Vector2( 44, 175.5 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 56, 67.5 )
 
+[sub_resource type="CircleShape2D" id=23]
+radius = 163.169
+
+[sub_resource type="Animation" id=24]
+resource_name = "ExclamationAnimation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Alert-Exclamation:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -17.4603, 22.6895, -17.4603, 22.6895, 0.0 ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Alert-Exclamation:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 209.75, 124.875 )
 
@@ -164,8 +202,10 @@ script = SubResource( 9 )
 inspectorIcon = ExtResource( 2 )
 
 [node name="Old Man" type="KinematicBody2D" parent="."]
-position = Vector2( 480, 440 )
+position = Vector2( 344, 360 )
 z_index = 1
+collision_layer = 32769
+collision_mask = 32769
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
@@ -207,9 +247,12 @@ centered = false
 
 [node name="Alarm" type="StaticBody2D" parent="."]
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 id = "AlarmClock"
 promptText = "This is an alarm clock"
-alarmSounds = [ null, null, null, ExtResource( 16 ) ]
+alarmSounds = [ null, null, ExtResource( 20 ), ExtResource( 16 ) ]
 alarmSongsList = [ "Screamo", "MorningNews", "SpikeDefuse", "RvrFlwsInYou" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alarm"]
@@ -226,6 +269,7 @@ margin_top = 8.0
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -296,6 +340,35 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
 [node name="AlarmSoundPlayer" type="AudioStreamPlayer2D" parent="Alarm"]
+
+[node name="Area2D" type="Area2D" parent="Alarm"]
+position = Vector2( 1136, 256 )
+collision_layer = 32769
+collision_mask = 32769
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alarm/Area2D"]
+modulate = Color( 0, 0.0392157, 1, 1 )
+shape = SubResource( 23 )
+
+[node name="Alert-VF" type="Node2D" parent="Alarm"]
+visible = false
+
+[node name="Alert-Triangle" type="Sprite" parent="Alarm/Alert-VF"]
+position = Vector2( 1131.5, 237.5 )
+texture = ExtResource( 18 )
+
+[node name="Alert-Exclamation" type="Sprite" parent="Alarm/Alert-VF"]
+position = Vector2( 1131.5, 241.5 )
+texture = ExtResource( 19 )
+
+[node name="Alert-VF-AP" type="AnimationPlayer" parent="Alarm/Alert-VF"]
+anims/ExclamationAnimation = SubResource( 24 )
+anims/RESET = SubResource( 25 )
 
 [node name="Bed" type="StaticBody2D" parent="."]
 __meta__ = {

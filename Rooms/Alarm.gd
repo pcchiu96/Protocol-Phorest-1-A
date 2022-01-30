@@ -7,7 +7,7 @@ var currentAlarmSong
 
 
 func _ready():
-	currentAlarmSong = "RvrFlwsInYou"
+	currentAlarmSong = "SpikeDefuse"
 
 func optionSelect(optionString):
 	currentAlarmSong = optionString
@@ -19,7 +19,13 @@ func _input(event):
 		var soundPlayer = get_node("AlarmSoundPlayer")
 		
 		soundPlayer.stream = alarm
-		soundPlayer.play()
 		
 		#Main.heartAttack()
 		
+func triggerAutoInteract():
+	var alarm = alarmSounds[alarmSongsList.find(currentAlarmSong)]
+	var soundPlayer = get_node("AlarmSoundPlayer")
+		
+	soundPlayer.stream = alarm
+	soundPlayer.play()
+	Main.heartAttack(2)
