@@ -18,14 +18,13 @@ func registerInteractable(id, interactable):
 		interactablesList[id] = interactable
 		print("Interactable registered: " + id)
 
-<<<<<<< HEAD
 func getIsOldString():
 	if (isOld):
 		return "Old"
 	else:
 		return "Kid"
-=======
+
+
 func heartAttack(): 
 	isOld = false
 	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Kid.tscn")
->>>>>>> 2fb3b6b49429c6a4572951757ac60e719e1bde64
