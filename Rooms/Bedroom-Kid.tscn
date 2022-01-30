@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/kid-walk-1.png" type="Texture" id=1]
 [ext_resource path="res://Assets/bedroom-bed.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Rooms/DialogBox.gd" type="Script" id=14]
 [ext_resource path="res://icon.png" type="Texture" id=15]
 [ext_resource path="res://Assets/old-man-walk-1.png" type="Texture" id=16]
+[ext_resource path="res://Assets/KidOverlay.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 18 )
@@ -150,6 +151,14 @@ tracks/0/keys = {
 }
 
 [node name="Bedroom-Kid" type="Node2D"]
+
+[node name="KidOverlay" type="Sprite" parent="."]
+position = Vector2( 641, 361 )
+z_index = 9
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Kid" type="KinematicBody2D" parent="."]
 position = Vector2( 312, 329 )

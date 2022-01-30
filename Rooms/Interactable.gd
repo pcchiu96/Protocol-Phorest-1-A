@@ -17,7 +17,8 @@ func _input(event):
 			triggerOptions()
 
 func triggerOptions():
-	find_node("AlarmSelection").visible = true
+	if(find_node("AlarmSelection")!=null):
+		find_node("AlarmSelection").visible = true
 			
 		
 func interactHover():

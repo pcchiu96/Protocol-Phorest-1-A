@@ -1,12 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Old Man.gd" type="Script" id=1]
 [ext_resource path="res://Assets/bedroom-old-bottom-wall.png" type="Texture" id=2]
 [ext_resource path="res://Assets/old-man-walk-1.png" type="Texture" id=3]
 [ext_resource path="res://Assets/old-man-walk-2.png" type="Texture" id=4]
 [ext_resource path="res://Rooms/TouchySensorArea.gd" type="Script" id=5]
-[ext_resource path="res://Assets/bedroom-old-top-and-sides.png" type="Texture" id=6]
+[ext_resource path="res://Assets/living-room-old-top-and-sides.png" type="Texture" id=6]
 [ext_resource path="res://Assets/bedroom-floor.png" type="Texture" id=7]
+[ext_resource path="res://Assets/burglar.png" type="Texture" id=8]
+[ext_resource path="res://Assets/coffee table.png" type="Texture" id=9]
+[ext_resource path="res://Rooms/Burglar.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 18 )
@@ -92,10 +95,107 @@ extents = Vector2( 45, 360 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 640, 50 )
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 379.332
+
+[sub_resource type="Animation" id=12]
+resource_name = "BurglerAttack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Burglar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 947, 239 ), Vector2( 1072, 253 ), Vector2( 1323, 254 ), Vector2( 1566, 233 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Burglar:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 64.4863, 106.702, 204.638, -39.1941, 7.01487 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Burglar:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.683521, 0.683521 ), Vector2( 0.683521, 0.683521 ), Vector2( 0.683521, 0.517908 ), Vector2( 0.683521, 0.816775 ), Vector2( 0.684, 0.684 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Burglar:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Burglar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 947, 239 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Burglar:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Burglar:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.683521, 0.683521 ) ]
+}
+
 [node name="Living-Room-Old" type="Node2D"]
 
+[node name="CoffeeTable" type="Sprite" parent="."]
+position = Vector2( 951, 358 )
+texture = ExtResource( 9 )
+
 [node name="Old Man" type="KinematicBody2D" parent="."]
-position = Vector2( 891, 380 )
+position = Vector2( 291, 245 )
 z_index = 1
 script = ExtResource( 1 )
 __meta__ = {
@@ -166,3 +266,25 @@ __meta__ = {
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -640, -670 )
+
+[node name="Burglar" type="Area2D" parent="."]
+position = Vector2( -1091, 104 )
+script = ExtResource( 10 )
+
+[node name="Burglar" type="Sprite" parent="Burglar"]
+position = Vector2( 947, 239 )
+scale = Vector2( 0.683521, 0.683521 )
+texture = ExtResource( 8 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Burglar"]
+modulate = Color( 0, 0.0392157, 1, 1 )
+position = Vector2( 1136, 256 )
+shape = SubResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Burglar"]
+anims/BurglerAttack = SubResource( 12 )
+anims/RESET = SubResource( 13 )

@@ -13,6 +13,7 @@ func _input(event):
 		print("Interact Pressed")
 		print(isActive)
 		if(isActive):
+			Main.currentRoom = roomname
 			SceneChanger.change_scene("res://Rooms/" + roomname + "-"+  Main.getIsOldString() +".tscn")
 
 
