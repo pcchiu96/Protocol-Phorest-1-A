@@ -27,8 +27,12 @@ func _physics_process(delta):
 			cleanUpHoverList.append(body)
 	
 	for body in overlappingBodies:
+		print(body)
+		print(!interactedHover.has(body))
+		print(body.has_method("interactHover"))
 		if(!interactedHover.has(body) && body.has_method("interactHover")):
 			print("interactHover")
+			print(body)
 			body.interactHover()
 			interactedHover.append(body)
 			

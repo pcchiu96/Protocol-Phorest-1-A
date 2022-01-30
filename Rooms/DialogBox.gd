@@ -11,12 +11,13 @@ func displayDialog(text):
 	find_node("DialogText").bbcode_text = text
 	$AnimationPlayer.play("DialogAnimation")
 	
-	
 func optionSelect(selectionString):
 	Main.isFrozen = false
 	visible = false
+	$AnimationPlayer.stop()
 
 func _input(event):
-	if Input.is_action_pressed("ui_accept"):
+	if visible && Input.is_action_pressed("ui_accept"):
 		Main.isFrozen = false
 		visible = false
+		$AnimationPlayer.stop()

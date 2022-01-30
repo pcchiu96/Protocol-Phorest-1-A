@@ -1,15 +1,29 @@
-extends "res://Rooms/Interactable.gd"
+extends Node2D
 
 export (String) var roomname
 
+var isActive = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
 func _input(event):
-	if Input.is_action_pressed("ui_accept"):
-		get_node("InspectIcon").visible = true
-		
-		SceneChanger.change_scene("res://Rooms/" + roomname + "-"+  Main.getIsOldString() +".tscn")
+	if Input.is_action_pressed("ui_interact"):
+		print("Interact Pressed")
+		print(isActive)
+		if(isActive):
+			SceneChanger.change_scene("res://Rooms/" + roomname + "-"+  Main.getIsOldString() +".tscn")
+
+
+func triggerOptions():
+	find_node("AlarmSelection").visible = true
+			
 		
 func interactHover():
-	get_node("InspectIcon").visible = true
+	print("Exit - Hover")
+	isActive = true
 	
 func interactLeave():
-	get_node("InspectIcon").visible = false
+	print("Exit - Leave")
+	isActive = false

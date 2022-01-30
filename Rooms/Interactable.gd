@@ -11,7 +11,7 @@ func _ready():
 	pass
 
 func _input(event):
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_interact"):
 		if(isActive):
 			get_parent().find_node("DialogBox").displayDialog(promptText)
 			triggerOptions()
