@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 # id of the interactable used to register into game variables
-export (String) var id
 export (String) var promptText
 
 var inspectorID
@@ -9,7 +8,7 @@ var isActive = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Main.registerInteractable(id, self)
+	pass
 
 func _input(event):
 	if Input.is_action_pressed("ui_accept"):
@@ -18,7 +17,7 @@ func _input(event):
 			triggerOptions()
 
 func triggerOptions():
-	find_node("Selection").popup()
+	find_node("AlarmSelection").visible = true
 			
 		
 func interactHover():

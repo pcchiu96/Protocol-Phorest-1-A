@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bedroom-bottom-wall.png-4e443ca2885efea7bf6eab455322e4b0.stex"
+path="res://.import/bedroom-kid-bottom-wall.png-c4ba8c2505b9bf3084f0f732701cf087.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/bedroom-bottom-wall.png"
-dest_files=[ "res://.import/bedroom-bottom-wall.png-4e443ca2885efea7bf6eab455322e4b0.stex" ]
+source_file="res://Assets/bedroom-kid-bottom-wall.png"
+dest_files=[ "res://.import/bedroom-kid-bottom-wall.png-c4ba8c2505b9bf3084f0f732701cf087.stex" ]
 
 [params]
 

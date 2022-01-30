@@ -1,9 +1,21 @@
-extends OptionButton
+extends Button
 
 export (String) var selectionString
+export (Array, String) var targetNodeNames
 
 func _ready():
 	pass # Replace with function body.
 
 func _pressed():
-	get_parent().get_parent().optionSelect(selectionString)
+	
+	for nodeName in targetNodeNames:
+		if(find_parent(nodeName) == null):
+			find_parent(Main.currentRoom + "-" + Main.getIsOldString()).find_node(nodeName).optionSelect(selectionString)
+		else:
+			find_parent(nodeName).optionSelect(selectionString)
+			
+	
+	get_parent().visible = false
+
+
+

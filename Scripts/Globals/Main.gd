@@ -3,20 +3,19 @@
 extends Node
 
 var isOld
-var interactablesList
+var gameData
+var isFrozen
 
 var currentRoom = "Bedroom"
 
 
 func _ready():
 	isOld = true
-	interactablesList = {}
-	isOld = true
-
-func registerInteractable(id, interactable):
-	if(!interactablesList.has(id)):
-		interactablesList[id] = interactable
-		print("Interactable registered: " + id)
+	isFrozen = false
+	gameData = {
+		"SelectedAlarm" : "SpikeDefuse",
+		"SafeAlarm" : "RvrFlwsInYou"
+	}
 
 func getIsOldString():
 	if (isOld):
@@ -28,3 +27,7 @@ func getIsOldString():
 func heartAttack(delay): 
 	isOld = false
 	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Kid.tscn", delay)
+	
+func growUp(delay):
+	isOld = true
+	SceneChanger.change_scene("res://Rooms/" + currentRoom + "-Old.tscn", delay)

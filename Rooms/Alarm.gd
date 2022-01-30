@@ -3,31 +3,23 @@ extends "res://Rooms/Interactable.gd"
 export (Array, AudioStreamMP3) var alarmSounds
 
 export (Array, String) var alarmSongsList
-var currentAlarmSong
 
 
 func _ready():
-	currentAlarmSong = "SpikeDefuse"
+	pass
 
 func optionSelect(optionString):
-	currentAlarmSong = optionString
-	print(currentAlarmSong)
+	Main.gameData["SelectedAlarm"] = optionString
+	print(Main.gameData["SelectedAlarm"])
 	
-func _input(event):
-	if Input.is_action_pressed("ui_accept"):
-		var alarm = alarmSounds[alarmSongsList.find(currentAlarmSong)]
-		var soundPlayer = get_node("AlarmSoundPlayer")
-		
-		soundPlayer.stream = alarm
-		soundPlayer.stream.loop = false
-		
-		#Main.heartAttack()
+	Main.growUp(0.5)
 		
 func triggerAutoInteract():
-	var alarm = alarmSounds[alarmSongsList.find(currentAlarmSong)]
+	var alarm = alarmSounds[alarmSongsList.find(Main.gameData["SelectedAlarm"])]
 	var soundPlayer = get_node("AlarmSoundPlayer")
 		
 	soundPlayer.stream = alarm
 	soundPlayer.play()
 	print("Play sounds")
-	Main.heartAttack(1.5)
+	if(Main.gameData["SelectedAlarm"] != Main.gameData["SafeAlarm"]):
+		Main.heartAttack(1.5)
